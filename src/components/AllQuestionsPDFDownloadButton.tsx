@@ -3,7 +3,7 @@ import { useState } from 'react';
     import { pdf } from '../lib/pdf-worker';
     import { QuestionPDF } from './QuestionPDF';
     import { supabase } from '../lib/supabase';
-    import { Folder, Category, Question } from '../types';
+    import { Question } from '../types';
     import toast from 'react-hot-toast';
 
     // Fisher-Yates shuffle algorithm
@@ -57,9 +57,6 @@ import { useState } from 'react';
           if (!questions) return [];
 
           // Organize questions by folder and category
-          const folderMap = new Map(folders.map(f => [f.id, f.name]));
-          const categoryMap = new Map(categories.map(c => [c.id, c.name]));
-
           const organizedQuestions = folders.map(folder => ({
             folderName: folder.name,
             categories: categories
