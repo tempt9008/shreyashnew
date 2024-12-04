@@ -23,9 +23,12 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled;
 };
 
-interface CategoryQuestions {
-  categoryName: string;
-  questions: Question[];
+interface OrganizedQuestions {
+  folderName: string;
+  categories: {
+    categoryName: string;
+    questions: Question[];
+  }[];
 }
 
 export default function PDFDownloadButton({
@@ -36,7 +39,7 @@ export default function PDFDownloadButton({
 }: PDFDownloadButtonProps) {
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const organizeQuestionsByCategory = async (questions: Question[]): Promise<CategoryQuestions[]> => {
+  const organizeQuestionsByCategory = async (questions: Question[]): Promise<OrganizedQuestions[]> => {
     // Get unique category IDs
     const categoryIds = [...new Set(questions.map(q => q.category_id))];
 
@@ -59,10 +62,13 @@ export default function PDFDownloadButton({
     }, {} as Record<string, Question[]>);
 
     // Convert to array and shuffle questions within each category
-    return Object.entries(groupedQuestions).map(([categoryName, questions]) => ({
-      categoryName,
-      questions: shuffleArray(questions),
-    }));
+    return [{
+      folderName: title,
+      categories: Object.entries(groupedQuestions).map(([categoryName, questions]) => ({
+        categoryName,
+        questions: shuffleArray(questions),
+      }))
+    }];
   };
 
   const handleDownload = async () => {
