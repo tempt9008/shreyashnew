@@ -33,7 +33,7 @@ export default function QuestionList({ categoryId }: QuestionListProps) {
         .from('questions')
         .select('*')
         .eq('category_id', categoryId)
-        .order('created_at', { ascending: true });
+        .order('created_at', { ascending: false });
 
       if (error) throw error;
       setQuestions(data || []);
@@ -53,7 +53,7 @@ export default function QuestionList({ categoryId }: QuestionListProps) {
 
       if (error) throw error;
 
-      setQuestions([...questions, data]);
+      setQuestions([data, ...questions]);
       toast.success('Question created successfully');
       setIsCreateDialogOpen(false);
     } catch (error) {
@@ -181,7 +181,7 @@ export default function QuestionList({ categoryId }: QuestionListProps) {
 
       if (error) throw error;
 
-      setQuestions([...questions, data]);
+      setQuestions([data, ...questions]);
       toast.success('Question duplicated successfully');
     } catch (error) {
       console.error('Error duplicating question:', error);
