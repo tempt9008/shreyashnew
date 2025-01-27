@@ -47,13 +47,13 @@ import { Page, Text, Document, StyleSheet, View, Image } from '@react-pdf/render
       },
       imageContainer: {
         marginBottom: 5,
-        maxHeight: 200,
+        maxHeight: 400,
         alignItems: 'center',
       },
       questionImage: {
         objectFit: 'contain',
-        maxWidth: '60%',
-        maxHeight: 120,
+        maxWidth: '90%',
+        maxHeight: 240,
       },
       options: {
         marginLeft: 20,
