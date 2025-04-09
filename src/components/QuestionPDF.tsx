@@ -53,7 +53,7 @@ import { Page, Text, Document, StyleSheet, View, Image } from '@react-pdf/render
       questionImage: {
         objectFit: 'contain',
         maxWidth: '95%',
-        maxHeight: 240,
+        maxHeight: 400,
       },
       options: {
         marginLeft: 20,
